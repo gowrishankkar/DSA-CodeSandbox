@@ -180,5 +180,5 @@ function test(A) {
   }
   // return total > maxLength ? maxLength + 1 : maxLength
 
-  console.log("rightArsdr", total > maxLength ? maxLength + 1 : maxLength);
+  console.log("rightArsdr test", total > maxLength ? maxLength + 1 : maxLength);
 }
