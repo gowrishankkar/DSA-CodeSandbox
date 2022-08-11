@@ -1,46 +1,101 @@
-// function diamond(a) {
-//   let result = `*`.repeat(8).split("");
-//   console.log("test  s2 sdasd", result);
-//   let center = (a * 2) / 2;
-//   let l = center - 1;
-//   let r = center;
-//   // console.log(result.join(""));
-//   // for (let i = 1; i <= 2 * a; i++) {
-//   //   if (l > 0 && r < 2 * a - 1) {
-//   //     result[l] = " ";
-//   //     result[r] = " ";
-//   //     r++;
-//   //     l--;
-//   //     console.log(result.join(""));
-//   //   }
-//   // }
-//   let result2 = `*`.repeat(8).split("");
-//   console.log("testas dasd  s2", result2);
-//   let newl = 1;
-//   let newr = 2 * a - 2;
+function test(A, B) {
+  var lengthNums = A.length;
+  let result = [];
+  let finalresult = [];
 
-//   for (let i = 1; i <= 2 * a; i++) {
-//     if (newr > 0 && newl < 2 * a - 1) {
-//       result2[newl] = " ";
-//       result2[newr] = " ";
-//       newr--;
-//       newl++;
-//       // console.log("test ", result2);
-//     }
-//   }
-//   // console.log("test", result2.join(""));
-// }
-
-diamond(4);
-
-function diamond(N) {
-  let length = 2 * N;
-  let center = (N * 2) / 2;
-  for (let i = 0; i < length; i++) {
-    let result = [];
-    for (let j = 0; j < length; j++) {
-      result.push("*");
+  for (var i = 0; i < lengthNums - 1; i++) {
+    for (var j = i; j < lengthNums; j++) {
+      if (A[i] + A[j] === B) result.push([i + 1, j + 1]);
     }
-    console.log("result", result);
   }
+  console.log("result", result);
+  if (result.length > 0) {
+    let minimumIndex2 = [];
+    let minIndex2Value = Number.POSITIVE_INFINITY;
+    for (let k = 0; k < result.length; k++) {
+      if (result[k][1] < minIndex2Value) {
+        minIndex2Value = result[k][1];
+        minimumIndex2.push([result[k][0], result[k][1]]);
+      }
+    }
+    console.log("minimumIndex2", minIndex2Value);
+    finalresult = minimumIndex2;
+
+    if (minimumIndex2.length > 1) {
+      let minimumIndex1 = [];
+      let minIndex1Value = minimumIndex2[0][1];
+      for (let k = 0; k < result.length; k++) {
+        if (result[k][0] < minIndex1Value) {
+          minIndex1Value = result[k][0];
+          minimumIndex1.push([result[k][0], result[k][1]]);
+        }
+      }
+      finalresult = minimumIndex1;
+    }
+  }
+
+  console.log("finalresult", finalresult);
+  // return finalresult[0] ? finalresult[0] : [];
 }
+
+test(
+  [
+    -5,
+    1,
+    4,
+    -7,
+    10,
+    -7,
+    0,
+    7,
+    3,
+    0,
+    -2,
+    -5,
+    -3,
+    -6,
+    4,
+    -7,
+    -8,
+    0,
+    4,
+    9,
+    4,
+    1,
+    -8,
+    -6,
+    -6,
+    0,
+    -9,
+    5,
+    3,
+    -9,
+    -5,
+    -9,
+    6,
+    3,
+    8,
+    -10,
+    1,
+    -2,
+    2,
+    1,
+    -9,
+    2,
+    -3,
+    9,
+    9,
+    -10,
+    0,
+    -9,
+    -2,
+    7,
+    0,
+    -4,
+    -3,
+    1,
+    6,
+    -3
+  ],
+  -1
+);
