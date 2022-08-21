@@ -1,101 +1,135 @@
 function test(A, B) {
-  var lengthNums = A.length;
+  // const sumSet = new Set();
+  // let sum = 0;
+  // for (let s = 0; s < A.length; s++) {
+  //   // sum += A[i];
+  //   for (let e = s; e < A.length; e++) {
+  //     // if (sum === B) {
+  //     let sum = 0;
+  //     for (let k = s; k <= e; k++) {
+  //       let sum = A[k];
+  //       if (sum === B) console.log("sum", sum,s, e);
+  //     }
+  //     //   sumSet.add(i);
+  //     // }
+  //   }
+
+  //   // sumSet.add(sum);
+  // }
+  // console.log("sumSet", sumSet);
   let result = [];
-  let finalresult = [];
+  for (let s = 0; s < A.length; s++) {
+    let sum = 0;
+    for (let e = s; e < A.length; e++) {
+      sum += A[e];
 
-  for (var i = 0; i < lengthNums - 1; i++) {
-    for (var j = i; j < lengthNums; j++) {
-      if (A[i] + A[j] === B) result.push([i + 1, j + 1]);
+      // console.log('sum', sum)
+
+      if (sum === B) {
+        result.push([s, e]);
+        // console.log(" sum ", sum, A[s], A[e]);
+      }
     }
   }
-  console.log("result", result);
-  if (result.length > 0) {
-    let minimumIndex2 = [];
-    let minIndex2Value = Number.POSITIVE_INFINITY;
-    for (let k = 0; k < result.length; k++) {
-      if (result[k][1] < minIndex2Value) {
-        minIndex2Value = result[k][1];
-        minimumIndex2.push([result[k][0], result[k][1]]);
-      }
-    }
-    console.log("minimumIndex2", minIndex2Value);
-    finalresult = minimumIndex2;
+  let final = [];
+  if (result[0]) {
+    let one = result[0];
 
-    if (minimumIndex2.length > 1) {
-      let minimumIndex1 = [];
-      let minIndex1Value = minimumIndex2[0][1];
-      for (let k = 0; k < result.length; k++) {
-        if (result[k][0] < minIndex1Value) {
-          minIndex1Value = result[k][0];
-          minimumIndex1.push([result[k][0], result[k][1]]);
-        }
-      }
-      finalresult = minimumIndex1;
+    for (let s = one[0]; s <= one[1]; s++) {
+      // console.log('s', A[s])
+      final.push(A[s]);
     }
   }
 
-  console.log("finalresult", finalresult);
-  // return finalresult[0] ? finalresult[0] : [];
+  console.log("result", final[0] ? final : [-1]);
+  return 0;
 }
-
-test(
-  [
-    -5,
-    1,
-    4,
-    -7,
-    10,
-    -7,
-    0,
-    7,
-    3,
-    0,
-    -2,
-    -5,
-    -3,
-    -6,
-    4,
-    -7,
-    -8,
-    0,
-    4,
-    9,
-    4,
-    1,
-    -8,
-    -6,
-    -6,
-    0,
-    -9,
-    5,
-    3,
-    -9,
-    -5,
-    -9,
-    6,
-    3,
-    8,
-    -10,
-    1,
-    -2,
-    2,
-    1,
-    -9,
-    2,
-    -3,
-    9,
-    9,
-    -10,
-    0,
-    -9,
-    -2,
-    7,
-    0,
-    -4,
-    -3,
-    1,
-    6,
-    -3
-  ],
-  -1
-);
+test([5, 10, 20, 100, 105], 110);
+// test([1, 2, 3, 4, 5], 5);
+// test(
+//   [
+//     23,
+//     50,
+//     44,
+//     6,
+//     39,
+//     15,
+//     44,
+//     27,
+//     47,
+//     29,
+//     30,
+//     44,
+//     28,
+//     42,
+//     7,
+//     32,
+//     16,
+//     40,
+//     8,
+//     7,
+//     5,
+//     48,
+//     48,
+//     16,
+//     9,
+//     5,
+//     50,
+//     16,
+//     18,
+//     9,
+//     21,
+//     26,
+//     48,
+//     37,
+//     27,
+//     7,
+//     5,
+//     29,
+//     24,
+//     28,
+//     10,
+//     44,
+//     21,
+//     1,
+//     48,
+//     15,
+//     31,
+//     41,
+//     42,
+//     23,
+//     4,
+//     32,
+//     40,
+//     40,
+//     27,
+//     20,
+//     29,
+//     42,
+//     25,
+//     18,
+//     37,
+//     43,
+//     13,
+//     30,
+//     42,
+//     24,
+//     17,
+//     42,
+//     14,
+//     42,
+//     43,
+//     36,
+//     31,
+//     29,
+//     24,
+//     24,
+//     8,
+//     3,
+//     12,
+//     34,
+//     14,
+//     6
+//   ],
+//   62
+// );
