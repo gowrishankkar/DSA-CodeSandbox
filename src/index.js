@@ -1,25 +1,46 @@
-function test(A, B) {
-  // console.log(A, B)
-  let arr = new Array(A).fill(0, 0, A);
-  console.log("arr", arr);
+// Problem Description
+// Given an array, arr[] of size N, the task is to find the count of array indices such that removing an element from these indices makes the sum of even-indexed and odd-indexed array elements equal.
+// A=[2, 1, 6, 4]
 
-  for (let i = 0; i < B.length; i++) {
-    let rangeStart = B[i][0] - 1;
-    let rangeEnd = B[i][1] - 1;
-    let value = B[i][2];
-    console.log(B[i], rangeStart, rangeEnd, value);
-    arr[rangeStart] += value;
-    if (rangeEnd + 1 < A) arr[rangeEnd + 1] -= value;
+function testFunction(A) {
+  let nums = A;
+  let prevEven = 0;
+  let prevOdd = 0;
+  let nextEven = 0;
+  let nextOdd = 0;
+
+  for (let index = 0; index < nums.length; index++) {
+    if (index % 2 === 0) {
+      nextEven += nums[index];
+    } else {
+      nextOdd += nums[index];
+    }
+  }
+  // console.log("nextEven", nextEven);
+  // console.log("nextOdd", nextOdd);
+
+  let indexToRemove = 0;
+
+  for (let index = 0; index < nums.length; index++) {
+    if (index % 2 === 0) {
+      nextEven -= nums[index];
+    } else {
+      nextOdd -= nums[index];
+    }
+    console.log("nextEven", nextEven);
+    console.log("nextOdd", nextOdd);
+    if (prevEven + nextOdd === prevOdd + nextEven) {
+      indexToRemove++;
+    }
+
+    if (index % 2 === 0) {
+      prevEven += nums[index];
+    } else {
+      prevOdd += nums[index];
+    }
   }
 
-  for (let j = 1; j < A; j++) {
-    arr[j] += arr[j - 1];
-  }
-  console.log("arr", arr);
+  return indexToRemove;
 }
 
-test(5, [
-  [1, 2, 10],
-  [2, 3, 20],
-  [2, 5, 25]
-]);
+console.log(testFunction([2, 1, 6, 4]));
