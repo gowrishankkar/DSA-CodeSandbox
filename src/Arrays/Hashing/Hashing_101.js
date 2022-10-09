@@ -11,3 +11,13 @@ console.log(mySet.size );
 
 // const uniq = [...mySet]
 // console.log(uniq)
+
+
+
+const mymap = new Map([['test', 'gowri'], [{}, '27']])
+mymap.set({}, 'c')
+
+
+console.log(mymap.has('twwest'))
+
+
