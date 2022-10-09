@@ -13,12 +13,12 @@ function test(A) {
     }
   }
   console.log('object', object)
-  for (let [key, value] of object) {
-    console.log(key + " = " + value);
-    if (value > 1) {
-        return 0;
-      }
+  for (let key in object) {
+    console.log(object.get(key), 'object[key]')
+    if (object.get(key) > 1) {
+      return 0;
     }
+  }
   return 1;
 }
 
