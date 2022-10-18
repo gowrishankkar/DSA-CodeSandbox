@@ -1,25 +1,77 @@
-function test(A) {
-  let object = new Map();
-  A = A.toString();
-  for (let i = 0; i < A.length; i++) {
-    let product = 1;
-    for (let j = i; j < A.length; j++) {
-      product = product * Number(A[j]);
-      if (!object.has(product)) {
-        object.set(product, 1);
-      } else {
-        object.set(product, object.get(product) + 1);
+// function test(A) {
+//   let freq = new Map();
+//   let odd = 0;
+//   for (let i = 0; i < A.length; i++)
+//     if (!freq.has(A[i])) {
+//       freq.set(A[i], 1);
+//     } else {
+//       freq.set(A[i], freq.get(A[i]) + 1);
+//     }
+
+//   console.log("freq", freq);
+//   for (let [key, value] of freq) {
+//     console.log('value', value)
+//     if (value % 2 == 1) odd++;
+//   }
+//   return odd > 1 ? 0 : 1;
+// }
+
+// console.log(test("uucgncntt"));
+
+function test(A, B) {
+  let x = 0;
+  let noSetBits = 0;
+  for (let i = 31; i >= 0 ; i--)
+  {
+      if ((A & (1 << i)) != 0) {
+          noSetBits++;
       }
-    }
+      
   }
-  console.log('object', object)
-  for (let [key, value] of object) {
-    console.log(key + " = " + value);
-    if (value > 1) {
-        return 0;
+  console.log('noSetBits', noSetBits, B)
+  console.log('B', B)
+  if (noSetBits == B) {
+      return A;
+  }
+  else if (noSetBits > B) {
+      for (let i = 31; i >= 0 ; i--)
+      {
+          if ((A & (1 << i)) != 0) {
+              x |= 1 << i;
+          }
+
       }
-    }
-  return 1;
+      for (let i = 0; i <= 31 && noSetBits != B; i++)
+      {
+          if ((A & (1 << i)) != 0) {
+              x &= ~(1 << i);
+              noSetBits--;
+          }
+
+      }
+  }
+  else if (noSetBits < B) {
+      for (let i = 31; i >= 0 && B > 0; i--)
+      {
+          if ((A & (1 << i)) != 0) {
+              x |= 1 << i;
+              B--;
+              console.log('x', x)
+              console.log('B', B)
+          }
+
+      }
+      for (let i = 0; i <= 31 && B > 0; i++)
+      {
+          if ((A & (1 << i)) == 0) {
+              x |= 1 << i;
+              B--;
+          }
+
+      }
+  }
+  return x;
 }
 
-test(123);
+console.log("test", test(3,3));
+
