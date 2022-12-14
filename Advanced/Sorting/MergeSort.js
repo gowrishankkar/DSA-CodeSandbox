@@ -15,6 +15,10 @@ function (A, B) {
             k++
         }
     }
+
+
+
+    
     while (i < A.length) {
         C[k] = A[i]
         i++;
