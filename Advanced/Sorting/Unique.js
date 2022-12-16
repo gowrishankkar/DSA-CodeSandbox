@@ -1,4 +1,12 @@
 function test(A) {
+
+
+
+
+
+
+
+  
   A.sort((a, b) => a - b);
   let count = 0;
   for (let i = 1; i < A.length; i++) {
