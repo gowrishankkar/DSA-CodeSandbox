@@ -63,30 +63,63 @@
 
 // console.log(factorial(5));
 
-let arr = [4, 5, 6, 9, 4, 1, 8, 3];
-let b = [
-  [2, 4],
-  [7, 8],
-  [1, 4],
-  [1, 6]
-];
-let prefixSumArr = [arr[0]];
-for (let i = 1; i < arr.length; i++) {
-  prefixSumArr[i] = prefixSumArr[i - 1] + arr[i];
-}
-let result = [];
-for (let i = 0; i < b.length; i++) {
-  // console.log(b[i]);
+// let arr = [4, 5, 6, 9, 4, 1, 8, 3];
+// let b = [
+//   [2, 4],
+//   [7, 8],
+//   [1, 4],
+//   [1, 6]
+// ];
+// let prefixSumArr = [arr[0]];
+// for (let i = 1; i < arr.length; i++) {
+//   prefixSumArr[i] = prefixSumArr[i - 1] + arr[i];
+// }
+// let result = [];
+// for (let i = 0; i < b.length; i++) {
+//   // console.log(b[i]);
 
-  let currentB = b[i];
+//   let currentB = b[i];
 
-  let right = currentB[1] - 1;
-  let left = currentB[0] - 1;
-  if (left == 0) {
-    result.push(prefixSumArr[right]);
-  } else {
-    let temp = prefixSumArr[right] - prefixSumArr[left - 1];
-    result.push(temp);
-  }
+//   let right = currentB[1] - 1;
+//   let left = currentB[0] - 1;
+//   if (left == 0) {
+//     result.push(prefixSumArr[right]);
+//   } else {
+//     let temp = prefixSumArr[right] - prefixSumArr[left - 1];
+//     result.push(temp);
+//   }
+// }
+// console.log("result", result);
+
+
+
+function test(A, B){
+          const lessThan = (arr, k) => {
+            let count = 0
+            for (let i = 0; i < arr.length; i++) {
+
+                if (arr[i] < k) count++;
+            }
+            console.log(count, k)
+            return count
+        }
+
+        let l = Math.min(A[0], B[0])
+        let r = Math.max(A[A.length - 1], B[B.length - 1])
+        let result = -1
+        while (l <= r) {
+            let m = Math.floor((l + r) / 2);
+            console.log('m', m)
+            let arr1 = lessThan(A, m)
+                        let arr2 = lessThan(B, m)
+            if ((arr1 + arr2) >= ((A.length + B.length + 1) / 2)) {
+                result = m;
+                r = m - 1
+            } else l = m + 1
+        }
+        console.log('result', result)
+        return result
 }
-console.log("result", result);
+
+
+console.log(test([1, 4, 5], [2, 3]))

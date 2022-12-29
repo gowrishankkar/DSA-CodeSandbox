@@ -33,19 +33,77 @@
 // console.log("test");
 // console.log(testFunction([2, 5, 6, 8, 6, 1, 2, 4, 5]));
 
-function test(A) {
-  A.sort((a, b) => a - b);
+// function test(A) {
+//   A.sort((a, b) => a - b);
+//   let count = 0;
+//   for (let i = 1; i < A.length; i++) {
+//     console.log('A', A[i - 1], A[i])
+//     if (A[i - 1] < A[i]) {
+//       continue;
+//     } else {
+//       count += A[i - 1] + 1 - A[i];
+//       A[i] += A[i - 1] + 1 - A[i];
+//     }
+//   }
+//   return count;
+// }
+
+// test([1, 1, 3]);
+
+const lessThan = (arr, k) => {
+  // let N = A.length ;
+  // let l = 0;
+  // let r = N - 1;
+  // let count = 0;
+  // while (l <= r) {
+  //   let mid = Math.floor((l + r) / 2);
+  //   if (A[mid] <= B) {
+  //     count++;
+  //     l = mid + 1;
+  //   } else r = mid - 1;
+  // }
+  // console.log("count", count);
+  // return count;
+
   let count = 0;
-  for (let i = 1; i < A.length; i++) {
-    console.log('A', A[i - 1], A[i])
-    if (A[i - 1] < A[i]) {
-      continue;
+
+  for (let i = 0; i < arr.length ; i++) {
+    if (arr[i] <= k) count++;
+  }
+
+  console.log("count", count, k);
+  return count;
+};
+
+function test(A, B) {
+  if (A.length <= 1) {
+    let mid = B[Math.floor(B.length - 1 / 2)];
+    return mid.toFixed(1);
+  }
+  let l = Math.min(A[0], B[0]);
+  let r = Math.max(A[A.length - 1], B[B.length - 1]);
+  let result = -1;
+  while (l <= r) {
+    let m = (l + r) / 2;
+    console.log("m", m);
+    console.log("l", l);
+    console.log("r", r);
+    let arr1 = lessThan(A, m);
+    let arr2 = lessThan(B, m);
+    let total = (A.length + B.length + 1) / 2;
+
+    console.log(arr1 + arr2, "total", total, arr1 + arr2 >= total);
+    if (arr1 + arr2 >= total) {
+      result = m;
+      r = m - 1;
     } else {
-      count += A[i - 1] + 1 - A[i];
-      A[i] += A[i - 1] + 1 - A[i];
+      l = m + 1;
     }
   }
-  return count;
+  console.log(result, "result", result.toFixed(2));
+  return result;
 }
 
-test([1, 1, 3]);
+// console.log(test([1, 4, 5], [2, 3]));
+// console.log(test([], [20]));
+console.log(test([-50, -41, -40, -19, 5, 21, 28], [-50, -21, -10]));
