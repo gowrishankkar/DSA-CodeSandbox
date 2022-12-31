@@ -32,13 +32,13 @@ const lessThan = (arr, k) => {
     let r = Math.max(A[A.length - 1], B[B.length - 1]);
     let result = -1;
     while (l <= r) {
-      let m = (l + r) / 2;
+      let m = (l + (r - l)) / 2;
       console.log("m", m);
       console.log("l", l);
       console.log("r", r);
       let arr1 = lessThan(A, m);
       let arr2 = lessThan(B, m);
-      let total = (A.length + B.length + 1) / 2;
+      let total = (A.length + B.length) / 2;
   
       console.log(arr1 + arr2, "total", total, arr1 + arr2 >= total);
       if (arr1 + arr2 >= total) {

@@ -1,109 +1,121 @@
-// function testFunction(A) {
-//   let num = Number(A.join(""));
-//   let rusNum = num + 1;
-//   let result = rusNum.toString().split('');
-//   console.log("A", A);
-//   console.log("string", rusNum + 1);
-//   console.log("string", result);
-//   // return string.toString().split(",");
-//   // let n = A.length;
-//   // let leftMax = [];
-//   // let rightMax = [];
-//   // leftMax[0] = A[0];
-//   // for (let i = 1; i < n; i++) {
-//   //   leftMax[i] = Math.max(leftMax[i - 1], A[i]);
-//   // }
-//   // rightMax[n - 1] = A[n - 1];
-//   // for (let i = n - 2; i >= 0; i--) {
-//   //   rightMax[i] = Math.max(rightMax[i + 1], A[i]);
-//   // }
-//   // console.log("leftMax", leftMax);
-//   // console.log("rightMax", rightMax);
-//   // let ans = 0;
-//   // for (let i = 0; i < n; i++) {
-//   //   // if (leftMax[i - 1] && rightMax[i + 1]) {
-//   //   ithValue = Math.min(leftMax[i - 1] || 0, rightMax[i + 1] || 0) - A[i];
-//   //   console.log("ithValue", ithValue);
-//   //   ans += Math.max(ithValue, 0);
-//   //   // }
-//   // }
-//   // return ans;
-// }
-
-// console.log("test");
-// console.log(testFunction([2, 5, 6, 8, 6, 1, 2, 4, 5]));
-
-// function test(A) {
-//   A.sort((a, b) => a - b);
-//   let count = 0;
-//   for (let i = 1; i < A.length; i++) {
-//     console.log('A', A[i - 1], A[i])
-//     if (A[i - 1] < A[i]) {
-//       continue;
-//     } else {
-//       count += A[i - 1] + 1 - A[i];
-//       A[i] += A[i - 1] + 1 - A[i];
-//     }
-//   }
-//   return count;
-// }
-
-// test([1, 1, 3]);
-
-const lessThan = (arr, k) => {
-  // let N = A.length ;
-  // let l = 0;
-  // let r = N - 1;
-  // let count = 0;
-  // while (l <= r) {
-  //   let mid = Math.floor((l + r) / 2);
-  //   if (A[mid] <= B) {
-  //     count++;
-  //     l = mid + 1;
-  //   } else r = mid - 1;
-  // }
-  // console.log("count", count);
-  // return count;
-
-  let count = 0;
-
-  for (let i = 0; i < arr.length ; i++) {
-    if (arr[i] <= k) count++;
-  }
-
-  console.log("count", count, k);
-  return count;
-};
-
 function test(A, B) {
-  if (A.length <= 1) {
-    let mid = B[Math.floor(B.length - 1 / 2)];
-    return mid.toFixed(1);
+  function allocation(m) {
+    let stu = 1;
+    let currPage = 0;
+    for (let i = 0; i < n; i++) {
+      if (A[i] > m) return false;
+      if (currPage + A[i] > m) {
+        stu++;
+        if (stu > B) return false;
+        currPage = A[i];
+      } else {
+        currPage += A[i];
+      }
+    }
+    return true;
   }
-  let l = Math.min(A[0], B[0]);
-  let r = Math.max(A[A.length - 1], B[B.length - 1]);
-  let result = -1;
-  while (l <= r) {
-    let m = (l + r) / 2;
-    console.log("m", m);
-    console.log("l", l);
-    console.log("r", r);
-    let arr1 = lessThan(A, m);
-    let arr2 = lessThan(B, m);
-    let total = (A.length + B.length + 1) / 2;
 
-    console.log(arr1 + arr2, "total", total, arr1 + arr2 >= total);
-    if (arr1 + arr2 >= total) {
-      result = m;
-      r = m - 1;
+  let res = Number.MAX_VALUE;
+  let n = A.length;
+  let l = 0;
+  let sum = 0;
+  for (let i = 0; i < n; i++) sum += A[i];
+  let h = sum;
+
+  if (n < B) return -1;
+  while (l <= h) {
+    let mid = Math.floor((h + l) / 2);
+    console.log("mid", mid);
+    if (allocation(mid)) {
+      res = Math.min(res, mid);
+      h = mid - 1;
     } else {
-      l = m + 1;
+      l = mid + 1;
     }
   }
-  console.log(result, "result", result.toFixed(2));
+
+  return res;
+}
+
+// console.log(test([12, 34, 67, 90], 2));
+console.log(test([31, 14, 19, 75], 12));
+
+function isPossible(arr, n, m, curr_min) {
+  let studentsRequired = 1;
+  let curr_sum = 0;
+
+  // iterate over all books
+  for (let i = 0; i < n; i++) {
+    // check if current number of pages are greater
+    // than curr_min that means we will get the result
+    // after mid no. of pages
+    if (arr[i] > curr_min) return false;
+
+    // count how many students are required
+    // to distribute curr_min pages
+    if (curr_sum + arr[i] > curr_min) {
+      // increment student count
+      studentsRequired++;
+
+      // update curr_sum
+      curr_sum = arr[i];
+
+      // if students required becomes greater
+      // than given no. of students,return false
+      if (studentsRequired > m) return false;
+    }
+
+    // else update curr_sum
+    else curr_sum += arr[i];
+  }
+  return true;
+}
+
+// method to find minimum pages
+function findPages(arr, n, m) {
+  let sum = 0;
+
+  // return -1 if no. of books is less than
+  // no. of students
+  if (n < m) return -1;
+
+  // Count total number of pages
+  for (let i = 0; i < n; i++) sum += arr[i];
+
+  // initialize start as 0 pages and end as
+  // total pages
+  let start = 0,
+    end = sum;
+  let result = Number.MAX_VALUE;
+
+  // traverse until start <= end
+  while (start <= end) {
+    // check if it is possible to distribute
+    // books by using mid as current minimum
+    let mid = Math.floor((start + end) / 2);
+    console.log("mid R", mid);
+    if (isPossible(arr, n, m, mid)) {
+      // if yes then find the minimum distribution
+      result = Math.min(result, mid);
+
+      // as we are finding minimum and books
+      // are sorted so reduce end = mid -1
+      // that means
+      end = mid - 1;
+    }
+    // if not possible means pages should be
+    // increased so update start = mid + 1
+    else start = mid + 1;
+  }
+
+  // at-last return minimum no. of  pages
   return result;
 }
 
-// console.log(test([1, 4, 5], [2, 3]));
-// console.log(test([], [20]));
-console.log(test([-50, -41, -40, -19, 5, 21, 28], [-50, -21, -10]));
+// let arr = [12, 34, 67, 90];
+// let m = 2;
+
+let arr = [31, 14, 19, 75];
+let m = 12;
+
+console.log(findPages(arr, arr.length, m));
