@@ -1,122 +1,79 @@
-// function test(A, B) {
-//   function allocation(m) {
-//     let stu = 1;
-//     let currPage = 0;
-//     for (let i = 0; i < n; i++) {
-//       if (A[i] > m) return false;
-//       if (currPage + A[i] > m) {
-//         stu++;
-//         if (stu > B) return false;
-//         currPage = A[i];
-//       } else {
-//         currPage += A[i];
-//       }
-//     }
-//     return true;
-//   }
-
-//   let res = Number.MAX_VALUE;
-//   let n = A.length;
-//   let l = 0;
-//   let sum = 0;
-//   for (let i = 0; i < n; i++) sum += A[i];
-//   let h = sum;
-
-//   if (n < B) return -1;
-//   while (l <= h) {
-//     let mid = Math.floor((h + l) / 2);
-//     console.log("mid", mid);
-//     if (allocation(mid)) {
-//       res = Math.min(res, mid);
-//       h = mid - 1;
-//     } else {
-//       l = mid + 1;
-//     }
-//   }
-
-//   return res;
+// function TreeNode(val, left, right) {
+//   this.val = val === undefined ? 0 : val;
+//   this.left = left === undefined ? null : left;
+//   this.right = right === undefined ? null : right;
 // }
 
-// // console.log(test([12, 34, 67, 90], 2));
-// console.log(test([31, 14, 19, 75], 12));
+// var deserialize = function (data) {
+//   const isBaseCase = !data.length;
+//   if (isBaseCase) return null;
 
-// function isPossible(arr, n, m, curr_min) {
-//   let studentsRequired = 1;
-//   let curr_sum = 0;
+//   const val = data.shift();
 
-//   // iterate over all books
-//   for (let i = 0; i < n; i++) {
-//     // check if current number of pages are greater
-//     // than curr_min that means we will get the result
-//     // after mid no. of pages
-//     if (arr[i] > curr_min) return false;
+//   const isNull = val === null || val === -1;
+//   if (isNull) return null;
 
-//     // count how many students are required
-//     // to distribute curr_min pages
-//     if (curr_sum + arr[i] > curr_min) {
-//       // increment student count
-//       studentsRequired++;
+//   return dfsDeserialize(val, data);
+// };
 
-//       // update curr_sum
-//       curr_sum = arr[i];
+// const dfsDeserialize = (val, data) => {
+//   const node = new TreeNode(val);
 
-//       // if students required becomes greater
-//       // than given no. of students,return false
-//       if (studentsRequired > m) return false;
-//     }
+//   node.left = deserialize(data);
+//   node.right = deserialize(data);
 
-//     // else update curr_sum
-//     else curr_sum += arr[i];
+//   return node;
+// };
+
+// const data = deserialize([9, 1, 2, -1, 3, 4, -1, -1, -1, -1]);
+// console.log("data", data);
+
+
+
+// const elementsCount = {}
+
+// hobbies.forEach((element) =>{
+//   if(elementsCount[element]){
+//     elementsCount[element] = elementsCount[element] + 1 
+//   } else {
+//     elementsCount[element] = 1
 //   }
-//   return true;
-// }
+// })
 
-// // method to find minimum pages
-// function findPages(arr, n, m) {
-//   let sum = 0;
 
-//   // return -1 if no. of books is less than
-//   // no. of students
-//   if (n < m) return -1;
 
-//   // Count total number of pages
-//   for (let i = 0; i < n; i++) sum += arr[i];
 
-//   // initialize start as 0 pages and end as
-//   // total pages
-//   let start = 0,
-//     end = sum;
-//   let result = Number.MAX_VALUE;
-
-//   // traverse until start <= end
-//   while (start <= end) {
-//     // check if it is possible to distribute
-//     // books by using mid as current minimum
-//     let mid = Math.floor((start + end) / 2);
-//     console.log("mid R", mid);
-//     if (isPossible(arr, n, m, mid)) {
-//       // if yes then find the minimum distribution
-//       result = Math.min(result, mid);
-
-//       // as we are finding minimum and books
-//       // are sorted so reduce end = mid -1
-//       // that means
-//       end = mid - 1;
-//     }
-//     // if not possible means pages should be
-//     // increased so update start = mid + 1
-//     else start = mid + 1;
-//   }
-
-//   // at-last return minimum no. of  pages
-//   return result;
-// }
-
-// // let arr = [12, 34, 67, 90];
-// // let m = 2;
-
-// let arr = [31, 14, 19, 75];
-// let m = 12;
-
-// console.log(findPages(arr, arr.length, m));
-
+function subsetSum( a,  n, sum)
+{
+    // Initializing the matrix
+    var tab = new Array(n + 1);
+    for (let i = 0; i< n+1; i++)
+      tab[i] = new Array(sum + 1);
+  // Initializing the first value of matrix
+    tab[0][0] = 1;
+    for (let i = 1; i <= sum; i++)
+        tab[0][i] = 0;
+ 
+    for (let i = 1; i <= n; i++)
+    {
+        for (let j = 0; j <= sum; j++)
+        {
+          // if the value is greater than the sum
+            if (a[i - 1] > j)
+                tab[i][j] = tab[i - 1][j];
+            else
+            {
+                tab[i][j] = tab[i - 1][j] + tab[i - 1][j - a[i - 1]];
+            }
+        }
+    }
+ 
+ console.log('tab', tab)
+    return tab[n][sum];
+}
+ 
+var n = 6;
+var a = new Array(2,3,5,6,8,10);
+var sum = 10;
+ 
+console.log(subsetSum(a, n, sum));
