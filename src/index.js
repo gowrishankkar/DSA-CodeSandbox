@@ -56,3 +56,20 @@
 
 // console.log("list", list, list.size);
 
+"use strict";
+// var fname = "gowri";
+let cap = {
+  fname: "Steve",
+  sayHi: function () {
+    console.log("Hi from ", this.fname);
+    const test = () => {
+      console.log(this.fname);
+      const test1 = () => {
+        console.log(this.fname);
+      };
+      test1();
+    };
+    test();
+  },
+};
+cap.sayHi();
