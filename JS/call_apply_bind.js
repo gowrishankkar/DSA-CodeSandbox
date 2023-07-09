@@ -56,9 +56,11 @@ cap.fn();
 cap.fn.call(ironMan, "thor", "hulk");
 cap.fn.apply(ironMan, ["thor", "hulk"]);
 
-const boundFn = cap.fn.bind(ironMan)
-boundFn('nat', 'vision')
+const boundFn = cap.fn.bind(ironMan);
+boundFn("nat", "vision");
 
-const boundFn2 = cap.fn.bind(ironMan)
-let team = ['hawkeye', 'starlord']
-boundFn2(...team)
+const boundFn2 = cap.fn.bind(ironMan);
+let team = ["hawkeye", "starlord"];
+boundFn2(...team);
+
+console.log("undefined", typeof undefined);

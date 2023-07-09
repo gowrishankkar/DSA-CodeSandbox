@@ -54,7 +54,39 @@ cap.fn.myApply(ironMan, ["thor", "hulk"]);
 const boundFn3 = cap.fn.customBind(ironMan);
 boundFn3();
 
-
-let a = [1,2,3,4]
+let a = [1, 2, 3, 4];
 a[100] = 100;
-console.log(a.length)
+console.log(a.length);
+
+function superClone(obj) {
+  let newObj = {};
+
+  for (let key in obj) {
+    let isKeyObj = typeof obj[key];
+    if (isKeyObj === " object") {
+      newObj[key] = superClone(obj[key]);
+    } else newObj[key] = obj[key];
+  }
+
+  return newObj;
+}
+
+let d = {
+  isbn: "123-456-222",
+  author: {
+    lastname: "Doe",
+    firstname: "Jane",
+    editor: {
+      lastname: "Smith",
+      firstname: "Jane",
+    },
+  },
+  editor: {
+    lastname: "Stestmith",
+    firstname: "Jane",
+  },
+  title: "The Ultimate Database Study Guide",
+  category: ["Non-Fiction", "Technology"],
+};
+
+console.log("clone", superClone(d));
