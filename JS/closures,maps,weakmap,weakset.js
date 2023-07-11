@@ -70,3 +70,86 @@ console.log(arr.reduce((a, b) => a + b)); // 50
 console.log(arr.myReduce((a, b) => a + b)); // 50
 
 console.log("sumArr", arr.myReducer(sum));
+
+var t = 10;
+const tested = () => {
+  console.log("tested", t);
+};
+
+const test = () => {
+  var t = 20;
+  tested();
+  console.log("test", t);
+};
+
+test();
+
+function createCounter(init, delta) {
+  function count() {
+    init = init + delta;
+    return init;
+  }
+  return count;
+}
+
+let c1 = createCounter(10, 5);
+let c2 = createCounter(5, 2);
+
+console.log(c1());
+console.log(c2());
+console.log(c1());
+console.log(c2());
+
+function counter(arg) {
+  let count = 0;
+  if (arg == 0) {
+    count++;
+    return count;
+  } else {
+    return function inner(arg) {
+      count++;
+      if (arg == 0) {
+        return count;
+      } else return inner;
+    };
+  }
+}
+
+console.log(counter(0));
+console.log(counter()()()()()(0));
+console.log(counter()()(0));
+
+function cal(n) {
+  let sum = 0;
+  for (let i = 0; i < n; i++) {
+    sum += i;
+  }
+  return sum;
+}
+
+function mem(fn) {
+  let c = {};
+
+  return function (n) {
+    let present = Object.keys(c).includes(n);
+    if (present) return c[n];
+    else {
+      const result = fn(n);
+      c[n] = result;
+      return result;
+    }
+  };
+}
+
+
+
+let eff = mem(cal);
+// console.log(eff)
+
+console.time();
+cal(111100)
+console.timeEnd()
+
+console.time();
+cal(111100)
+console.timeEnd()
