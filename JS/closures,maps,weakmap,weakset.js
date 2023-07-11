@@ -147,9 +147,9 @@ let eff = mem(cal);
 // console.log(eff)
 
 console.time();
-cal(111100)
+eff(121320)
 console.timeEnd()
 
 console.time();
-cal(111100)
+eff(121320)
 console.timeEnd()
