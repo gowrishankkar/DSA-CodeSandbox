@@ -89,3 +89,6 @@ obj2.prop = 33;
 
 console.log(obj2.prop);
 // Expected output: 42
+
+
+

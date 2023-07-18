@@ -7,11 +7,11 @@ let obj = {
 let arr = [];
 console.log(obj.__proto__);
 
-// console.log(arr.__proto__);
+console.log(arr.__proto__);
 
-// console.log(arr.__proto__.__proto__);
+console.log(arr.__proto__.__proto__);
 
-// console.log(arr.__proto__.__proto__.__proto__);
+console.log(arr.__proto__.__proto__.__proto__);
 
 // MCQ1
 function Rabbit(name) {
@@ -64,3 +64,5 @@ class A {
 
 A.prototype.c = 'c'
 console.log(A)
+
+
