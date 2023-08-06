@@ -153,3 +153,42 @@ console.timeEnd()
 console.time();
 eff(121320)
 console.timeEnd()
+
+
+// function applyPolyfill(fn, context, args) {
+//   // Check if the fn is a function
+//   if (typeof fn !== "function") {
+//     throw new TypeError("fn must be a function");
+//   }
+//   // Set the context if it’s null or undefined
+//   if (context == null) {
+//     context = window;
+//   }
+//   //   Create a unique property on the context object to store the function
+//   const uniqueProp = Symbol("applyPolyfill");
+//   context[uniqueProp] = fn;
+//   // Call the function with the given context and arguments
+
+//   const result = context[uniqueProp](...args);
+//   //   console.log('result', result)
+//   // Delete the unique property from the context object
+//   delete context[uniqueProp];
+//   // Return the result
+// //   console.log("result", result, context);
+//   return result;
+// //   context.fnRef = this;
+// //   var result = obj.fnRef(...args);
+// //   delete obj.fnRef;
+// //   return result;
+// }
+
+// function greet(country) {
+//   return "Hello, " + this.name + " from " + country;
+// }
+
+// const person = {
+//   name: "John",
+// };
+
+// const result = applyPolyfill(greet, person, ["India"]);
+// console.log(result);
